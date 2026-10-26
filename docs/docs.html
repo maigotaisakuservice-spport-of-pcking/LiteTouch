@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>導入マニュアル - LiteTouch (ライトタッチ)</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">🚀 LiteTouch <span class="logo-badge">v1.0 Enterprise</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">TOP</a></li>
+        <li><a href="builder.html">タグビルダー</a></li>
+        <li><a href="demo.html">デモ体験</a></li>
+        <li><a href="docs.html" class="active">導入マニュアル</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+        <li><a href="builder.html" class="nav-cta">今すぐ無料で試す →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <span class="hero-pill" style="color: var(--primary); background: #dbeafe; border: none;">📚 DOCUMENTATION & INTEGRATION GUIDE</span>
+      <h1 style="font-size: 36px; font-weight: 800; margin-top: 10px;">LiteTouch 導入マニュアル ＆ 技術仕様書</h1>
+      <p style="color: var(--text-muted); font-size: 16px;">LiteTouchの組み込み方法、GA4自動連携、セキュリティ仕様、および手動JS設定パターンについて解説します。</p>
+    </div>
+
+    <div class="card" style="margin-bottom: 28px;">
+      <h2>1. クイック設置ガイド</h2>
+      <p style="margin-bottom: 12px; color: var(--text-muted);">最も簡単な設置方法は、<a href="builder.html">タグビルダー</a>で出力された `<script>` タグを、導入先Webサイトの `</body>` 直前に挿入することです。</p>
+      <pre><code>&lt;!-- LiteTouch 埋め込みタグ例 --&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/your-account/litetouch@main/docs/v1/all.js" data-cfg="eyJ2ZXJzaW9uIjoiMS4wLjAi..." defer&gt;&lt;/script&gt;</code></pre>
+    </div>
+
+    <div class="card" style="margin-bottom: 28px;">
+      <h2>2. 配信モジュール一覧</h2>
+      <p style="margin-bottom: 12px; color: var(--text-muted);">用途やパフォーマンス要件に応じて、必要なモジュールのみを単体で読み込むことができます。</p>
+      <ul style="margin-left: 20px; line-height: 2; color: var(--text-muted);">
+        <li><code>v1/all.js</code> - 【全部入り】 Guide + EFO + Quick Menu + AutoFlow (複数機能同時利用時)</li>
+        <li><code>v1/guide.js</code> - 【単体】 ガイド / ステップツアー専用モジュール</li>
+        <li><code>v1/efo.js</code> - 【単体】 EFO 入力エラー指導専用モジュール</li>
+        <li><code>v1/menu.js</code> - 【単体】 クイックメニュー専用モジュール</li>
+        <li><code>v1/autoflow.js</code> - 【単体】 フォーム自動操作 (Auto-fill & Click) モジュール</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-bottom: 28px;">
+      <h2>3. 高度な使い方：手動設定 (Manual JavaScript Config)</h2>
+      <p style="margin-bottom: 12px; color: var(--text-muted);">ビルダーを使わず、JavaScriptで動的に設定オブジェクトを渡すことも可能です。スクリプトの読み込み前に `window.LiteTouchConfig` を定義します。</p>
+
+      <pre><code>&lt;script&gt;
+  window.LiteTouchConfig = {
+    version: "1.0.0",
+    domain: "example.com", // テスト環境では空文字 "" を指定
+    theme: {
+      primaryColor: "#2563eb",
+      customCss: ".lt-card { border-radius: 8px; }"
+    },
+    ga4: { enabled: true },
+    features: [
+      {
+        type: "efo",
+        selector: "input[name='company']",
+        triggerEvent: "blur",
+        ruleType: "preset",
+        presetKey: "no_abbreviation",
+        errorMessage: {
+          title: "(株)などの略称は禁止です！",
+          content: "正規名称で入力してください。"
+        }
+      }
+    ]
+  };
+&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/your-account/litetouch@main/docs/v1/efo.js" defer&gt;&lt;/script&gt;</code></pre>
+    </div>
+
+    <div class="card" style="margin-bottom: 28px;">
+      <h2>4. GA4 (Google Analytics 4) 自動連携仕様</h2>
+      <p style="margin-bottom: 12px; color: var(--text-muted);">LiteTouchは、ホストページ上の GA4 タグ (`window.gtag` または `window.dataLayer`) を自動検知してイベントを発火します。追加のトラッキングコード実装は不要です。</p>
+      <ul style="margin-left: 20px; line-height: 2; color: var(--text-muted);">
+        <li><code>widget_view</code>: ガイドステップが表示された際</li>
+        <li><code>widget_error</code>: EFO入力チェックでエラーが検知された際</li>
+        <li><code>quick_menu_open</code>: クイックメニューが起動された際</li>
+        <li><code>auto_flow_execute</code>: フォーム自動操作が実行された際</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-bottom: 28px;">
+      <h2>5. セキュリティとDDoS耐性</h2>
+      <ul style="margin-left: 20px; line-height: 2; color: var(--text-muted);">
+        <li><strong>ドメイン制御 (`domain`)</strong>: 設定されたドメイン以外でのタグ実行を即時ストップし、第三者による無断流用を防ぎます。(※`localhost` や `127.0.0.1` では開発利便性のため自動的に許容されます)</li>
+        <li><strong>DDoS耐性＆超高速 CDN</strong>: jsDelivr / GitHub Pages による完全静的 CDN 配信により、サーバーサイドでの負荷が発生せず、世界規模のキャッシュエッジネットワークにより高い対DDoS耐性を持ちます。</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 LiteTouch Platform. All rights reserved. | <a href="terms.html" style="color: var(--text-muted);">利用規約 (AS-IS原則)</a></p>
+  </footer>
+</body>
+</html>
