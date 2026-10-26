@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>動作体験プレイグラウンド - LiteTouch (ライトタッチ)</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/demo.js" defer></script>
+  <!-- Initial LiteTouch config for live demo -->
+  <script>
+    window.LiteTouchConfig = {
+      version: "1.0.0",
+      domain: "",
+      theme: {
+        primaryColor: "#2563eb",
+        borderRadius: "12px"
+      },
+      ga4: { enabled: true },
+      features: [
+        {
+          type: "efo",
+          id: "efo-company",
+          selector: "input[name='company']",
+          triggerEvent: "blur",
+          ruleType: "preset",
+          presetKey: "no_abbreviation",
+          errorMessage: {
+            title: "(株)などの略称は禁止です！",
+            content: "・〇〇株式会社\n・株式会社〇〇\nといった正規名称で入力してください。"
+          }
+        },
+        {
+          type: "quick_menu",
+          id: "menu-demo",
+          title: "ヘルプ＆ポータル",
+          categories: [
+            {
+              categoryName: "サポート＆マニュアル",
+              items: [
+                { label: "導入ドキュメントを見る", url: "docs.html" },
+                { label: "利用規約 (AS-IS) を確認", url: "terms.html" }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  </script>
+  <script src="v1/all.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">🚀 LiteTouch <span class="logo-badge">v1.0 Enterprise</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">TOP</a></li>
+        <li><a href="builder.html">タグビルダー</a></li>
+        <li><a href="demo.html" class="active">デモ体験</a></li>
+        <li><a href="docs.html">導入マニュアル</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+        <li><a href="builder.html" class="nav-cta">今すぐ無料で試す →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <span class="hero-pill" style="color: var(--primary); background: #dbeafe; border: none;">🎮 INTERACTIVE DEMO PLAYGROUND</span>
+      <h1 style="font-size: 36px; font-weight: 800; margin-top: 10px;">LiteTouch リアルタイム動作体験デモ</h1>
+      <p style="color: var(--text-muted); font-size: 16px;">以下のボタンを押すと、実際のフォーム上でLiteTouchの各機能（EFO、ガイドツアー、AutoFlow、クイックメニュー）がどのように作動するか体験できます。</p>
+    </div>
+
+    <!-- Control Dashboard -->
+    <div class="card" style="margin-bottom: 40px; background: #ffffff; border: 2px solid #bfdbfe;">
+      <h3 style="margin-bottom: 16px; color: var(--primary); display: flex; align-items: center; gap: 8px;">
+        ⚡ 1タップ体験アクションコントロール
+      </h3>
+      <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">
+        ボタンをクリックすると、LiteTouchが指定要素の座標を自動計算し、Shadow DOMで安全にUIを描画します。
+      </p>
+
+      <div class="btn-group" style="justify-content: flex-start; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="window.triggerEfoCheck()">1. EFOエラー指導 ( (株) 検知)</button>
+        <button class="btn btn-secondary" style="background: #0f172a; border: none;" onclick="window.triggerGuideTour()">2. ガイドツアーを開始する</button>
+        <button class="btn btn-secondary" style="background: #2563eb; color: white; border: none;" onclick="window.triggerAutoflow()">3. AutoFlow (フォーム自動操作)</button>
+      </div>
+      <small style="display: block; margin-top: 14px; color: #64748b; font-weight: 500;">
+        💡 右下の青い「❓」アイコンをクリックすると、常駐クイックメニューが開きます。
+      </small>
+    </div>
+
+    <!-- Sample Form -->
+    <div class="card" style="max-width: 650px; margin: 0 auto; background: #ffffff; padding: 40px;">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <h2 style="font-size: 22px; font-weight: 800;">お問い合わせ・会員登録フォーム (導入先例)</h2>
+        <p style="font-size: 13px; color: var(--text-muted);">既存のHTMLコードは無修正のまま、LiteTouchが動作しています。</p>
+      </div>
+
+      <form id="sample-form" onsubmit="event.preventDefault(); alert('フォームが送信されました！');">
+        <div class="form-group">
+          <label for="name-input">お名前 <span style="color: red;">*</span></label>
+          <input type="text" id="name-input" name="name" class="form-control" placeholder="例: 山田 太郎" required>
+        </div>
+
+        <div class="form-group">
+          <label for="company-input">貴社名 (EFOチェック対象) <span style="color: red;">*</span></label>
+          <input type="text" id="company-input" name="company" class="form-control" placeholder="例: 株式会社サンプル ((株)を入力してフォーカスアウト)">
+        </div>
+
+        <div class="form-group">
+          <label for="email-input">メールアドレス <span style="color: red;">*</span></label>
+          <input type="email" id="email-input" name="email" class="form-control" placeholder="yamada@example.com">
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: 16px;">
+          <input type="checkbox" id="agree-check" name="agree" style="width: 18px; height: 18px; cursor: pointer;">
+          <label for="agree-check" style="margin-bottom: 0; font-weight: 500; cursor: pointer;">利用規約およびプライバシーポリシーに同意する</label>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 20px; padding: 14px;">送信内容を確認する →</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 LiteTouch Platform. All rights reserved. | <a href="terms.html" style="color: var(--text-muted);">利用規約 (AS-IS原則)</a></p>
+  </footer>
+</body>
+</html>

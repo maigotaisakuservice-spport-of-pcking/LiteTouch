@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LiteTouch (ライトタッチ) - 次世代Web UX改善プラットフォーム</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">🚀 LiteTouch <span class="logo-badge">v1.0 Enterprise</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">TOP</a></li>
+        <li><a href="builder.html">タグビルダー</a></li>
+        <li><a href="demo.html">デモ体験</a></li>
+        <li><a href="docs.html">導入マニュアル</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+        <li><a href="builder.html" class="nav-cta">今すぐ無料で試す →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-pill">✨ ノーコード ＆ 超軽量 1行埋め込みエンジン</div>
+      <h1>タグ1行で、Webサイトのユーザー体験を<br>劇的に変革する。</h1>
+      <p>LiteTouch（ライトタッチ）は、既存サイトを一切壊さずに、ガイドツアー、EFOリアルタイム入力指導、クイックメニュー、フォーム自動操作をわずか5分で導入できる次世代UXエンハンスメント基盤です。</p>
+
+      <div class="btn-group">
+        <a href="builder.html" class="btn btn-primary">⚡ 1分でタグを自動生成 (Builder)</a>
+        <a href="demo.html" class="btn btn-secondary">🎮 ライブデモを体験する</a>
+      </div>
+
+      <div class="kpi-bar">
+        <div class="kpi-item">
+          <h3>+140%</h3>
+          <p>平均CVR改善率</p>
+        </div>
+        <div class="kpi-item">
+          <h3>5 minutes</h3>
+          <p>平均導入完了時間</p>
+        </div>
+        <div class="kpi-item">
+          <h3>0 Depend</h3>
+          <p>外部ライブラリ依存ゼロ</p>
+        </div>
+        <div class="kpi-item">
+          <h3>100% Shadow DOM</h3>
+          <p>CSS/JS 完全干渉遮断</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-size: 30px; font-weight: 800; margin-bottom: 12px;">エンタープライズ基準の4つのコアモジュール</h2>
+        <p style="color: var(--text-muted); font-size: 16px;">用途に合わせて単体モジュールまたは全部入り（all.js）を柔軟に選択できます。</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon">🧭</div>
+          <h3>1. ガイド ＆ ツアーモジュール</h3>
+          <p>新機能案内やオンボーディングツアーをターゲット要素の横にポップアップ表示。全画面暗転オーバーレイや「次へ/戻る」進捗ナビゲーションに対応。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>2. EFO 入力リアルタイム指導</h3>
+          <p>離脱の原因となるフォーム入力エラー（(株)などの略称、未入力、メアド形式）を `blur` 時にリアルタイム検知して指導。CVR低下を防ぎます。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">💡</div>
+          <h3>3. クイックメニューポータル</h3>
+          <p>画面右下に固定ヘルプアイコンを常駐。1タップでFAQや各種手続き導線リンクをまとめたダイアログが展開し、ユーザーの迷いを解消します。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h3>4. AutoFlow (フォーム自動操作)</h3>
+          <p>デモや定型操作を完全自動化。React/VueのVirtual DOM Stateに直接連動する Native Value Setter バイパス処理で確実に値をセット・クリックします。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & Safety section -->
+    <section class="card" style="margin-top: 50px; background: #ffffff;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+        <div>
+          <span style="color: var(--primary); font-weight: 700; font-size: 14px;">SECURITY & ARCHITECTURE</span>
+          <h2 style="font-size: 28px; font-weight: 800; margin: 12px 0 16px;">なぜLiteTouchは既存サイトに安全なのか？</h2>
+          <ul style="list-style: none; line-height: 2; color: var(--text-muted);">
+            <li>✅ <strong>Shadow DOM 採用</strong>: ホストサイトのCSS/JS汚染を完全シャットアウト</li>
+            <li>✅ <strong>ドメイン保護機能</strong>: 許可されたドメイン以外でのタグ不正利用を防止</li>
+            <li>✅ <strong>GA4 自動イベント連携</strong>: Google Analytics 4へコンバージョン分析データを自動発火</li>
+            <li>✅ <strong>DDoS 耐性＆超高速 CDN</strong>: jsDelivr / GitHub Pages エッジキャッシュで圧倒的堅牢性</li>
+          </ul>
+        </div>
+        <div>
+          <pre><code>// 導入はたったこれだけ！
+&lt;script
+  src="https://cdn.jsdelivr.net/gh/account/litetouch/docs/v1/all.js"
+  data-cfg="eyJ2ZXJzaW9uIjoiMS4wLjAi..."
+  defer
+&gt;&lt;/script&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Conversion CTA -->
+    <section class="card" style="margin-top: 50px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; text-align: center; padding: 60px 40px;">
+      <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 16px;">今すぐWebサイトのコンバージョンを改善しましょう</h2>
+      <p style="color: #94a3b8; font-size: 16px; margin-bottom: 30px;">タグ自動生成ビルダーを使えば、ノーコードで1分後に設置完了できます。</p>
+      <a href="builder.html" class="btn btn-primary" style="font-size: 16px; padding: 16px 36px;">🚀 無料でタグを作成する (Builder)</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 LiteTouch Platform. All rights reserved. | <a href="terms.html" style="color: var(--text-muted);">利用規約 (AS-IS原則)</a></p>
+  </footer>
+</body>
+</html>

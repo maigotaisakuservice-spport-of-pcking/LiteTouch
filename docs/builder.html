@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タグ自動生成ビルダー - LiteTouch (ライトタッチ)</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/builder.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">🚀 LiteTouch <span class="logo-badge">v1.0 Enterprise</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">TOP</a></li>
+        <li><a href="builder.html" class="active">タグビルダー</a></li>
+        <li><a href="demo.html">デモ体験</a></li>
+        <li><a href="docs.html">導入マニュアル</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+        <li><a href="builder.html" class="nav-cta">今すぐ無料で試す →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <span class="hero-pill" style="color: var(--primary); background: #dbeafe; border: none;">🛠️ NO-CODE TAG BUILDER</span>
+      <h1 style="font-size: 36px; font-weight: 800; margin-top: 10px;">埋め込みタグ自動生成ビルダー</h1>
+      <p style="color: var(--text-muted); font-size: 16px;">設定項目を選択・調整するだけで、Base64 UTF-8 エンコード済みの1行 `<script>` タグを生成します。</p>
+    </div>
+
+    <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: start;">
+      <!-- Config Form -->
+      <div class="card">
+        <h3 style="margin-bottom: 20px; font-size: 18px;">1. 設定のカスタマイズ</h3>
+
+        <div class="form-group">
+          <label for="selectedModule">配信モジュールの選択</label>
+          <select id="selectedModule" class="form-control" onchange="window.updateGeneratedTag()">
+            <option value="all">v1/all.js 【全部入り】 (Guide + EFO + Menu + AutoFlow)</option>
+            <option value="guide">v1/guide.js 【単体】 ガイド / ステップツアー専用</option>
+            <option value="efo">v1/efo.js 【単体】 EFO 入力エラー指導専用</option>
+            <option value="menu">v1/menu.js 【単体】 クイックメニュー専用</option>
+            <option value="autoflow">v1/autoflow.js 【単体】 フォーム自動操作専用</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="domainInput">許可ドメイン (Security Domain)</label>
+          <input type="text" id="domainInput" class="form-control" placeholder="example.com (空欄/localhostはテスト許容)" oninput="window.updateGeneratedTag()">
+          <small style="color: var(--text-muted); font-size: 12px; display: block; margin-top: 4px;">指定すると他サイトでのタグ無断流用・コピペを自動ブロックします。</small>
+        </div>
+
+        <div class="form-group">
+          <label for="primaryColorInput">テーマメインカラー</label>
+          <input type="color" id="primaryColorInput" class="form-control" value="#2563eb" style="height: 42px; padding: 2px; cursor: pointer;" onchange="window.updateGeneratedTag()">
+        </div>
+
+        <div class="form-group">
+          <label for="customCssInput">Shadow DOM カスタムCSS (任意)</label>
+          <textarea id="customCssInput" class="form-control" placeholder=".lt-card { font-size: 13px; }" oninput="window.updateGeneratedTag()"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="repoPathInput">CDN ディレクトリ Base URL</label>
+          <input type="text" id="repoPathInput" class="form-control" value="https://cdn.jsdelivr.net/gh/your-account/litetouch@main/docs/v1/" oninput="window.updateGeneratedTag()">
+        </div>
+      </div>
+
+      <!-- Output Display -->
+      <div class="card" style="background: #ffffff;">
+        <h3 style="margin-bottom: 20px; font-size: 18px;">2. 生成された埋め込みタグ</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">以下の `<script>` タグを導入先HTMLの `</body>` 直前に貼り付けてください。</p>
+
+        <pre style="white-space: pre-wrap; word-break: break-all;" id="outputScriptTag"></pre>
+
+        <button class="btn btn-primary" style="width: 100%; margin-top: 18px;" onclick="window.copyScriptTag()">📋 タグをワンタップコピー</button>
+
+        <h4 style="margin-top: 32px; margin-bottom: 10px; font-size: 15px;">解凍後のJSON構造イメージ (data-cfg)</h4>
+        <pre style="max-height: 220px; overflow-y: auto;" id="outputJsonConfig"></pre>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 LiteTouch Platform. All rights reserved. | <a href="terms.html" style="color: var(--text-muted);">利用規約 (AS-IS原則)</a></p>
+  </footer>
+</body>
+</html>

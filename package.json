@@ -1,0 +1,14 @@
+{
+  "name": "litetouch",
+  "version": "1.0.0",
+  "description": "LiteTouch (ライトタッチ) - Zero-dependency light-weight web asset suite",
+  "main": "docs/v1/all.js",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node tests/unit.test.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "esbuild": "^0.20.0"
+  }
+}
